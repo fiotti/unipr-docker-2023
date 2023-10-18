@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "mysql-data:/var/lib/mysql"
+  web-server:
+    image: httpd:2.4
+    ports:
+      - 8080:80
+    volumes:
+      - "./htdocs:/usr/local/apache2/htdocs"
+
+volumes:
+  mysql-data:
